@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Word Masters</title>
+
+    <link
+      rel="icon"
+      type="image/jpg"
+      sizes="200 x 166"
+      href="./images/word_puzzle.jpg"
+    />
+
+    <!-- Sweet Alert Pop Up Message for winning and losing -->
+    <!-- SweetAlert Dark Modal  -->
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    /> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Font Awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css"
+    />
+
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/animate.css@4/animate.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/animations.css" />
+    <link rel="stylesheet" href="./css/wordmaster.css" />
+  </head>
+  <body>
+    <!-- <canvas class="confetti hide_confetti" id="canvas"></canvas> -->
+    <header class="navbar">
+      <h1 class="brand">W⭕®d M🅰steRs</h1>
+      <hr width="auto" class="hr_ruler" size="5" id="hr_ruler" />
+    </header>
+
+    <div class="info-bar">
+      <div class="spiral">💢</div>
+    </div>
+
+    <div class="container">
+      <div class="scoreboard">
+        <div class="scoreboard-letter" id="letter-0"></div>
+        <div class="scoreboard-letter" id="letter-1"></div>
+        <div class="scoreboard-letter" id="letter-2"></div>
+        <div class="scoreboard-letter" id="letter-3"></div>
+        <div class="scoreboard-letter" id="letter-4"></div>
+        <div class="scoreboard-letter" id="letter-5"></div>
+        <div class="scoreboard-letter" id="letter-6"></div>
+        <div class="scoreboard-letter" id="letter-7"></div>
+        <div class="scoreboard-letter" id="letter-8"></div>
+        <div class="scoreboard-letter" id="letter-9"></div>
+        <div class="scoreboard-letter" id="letter-10"></div>
+        <div class="scoreboard-letter" id="letter-11"></div>
+        <div class="scoreboard-letter" id="letter-12"></div>
+        <div class="scoreboard-letter" id="letter-13"></div>
+        <div class="scoreboard-letter" id="letter-14"></div>
+        <div class="scoreboard-letter" id="letter-15"></div>
+        <div class="scoreboard-letter" id="letter-16"></div>
+        <div class="scoreboard-letter" id="letter-17"></div>
+        <div class="scoreboard-letter" id="letter-18"></div>
+        <div class="scoreboard-letter" id="letter-19"></div>
+        <div class="scoreboard-letter" id="letter-20"></div>
+        <div class="scoreboard-letter" id="letter-21"></div>
+        <div class="scoreboard-letter" id="letter-22"></div>
+        <div class="scoreboard-letter" id="letter-23"></div>
+        <div class="scoreboard-letter" id="letter-24"></div>
+        <div class="scoreboard-letter" id="letter-25"></div>
+        <div class="scoreboard-letter" id="letter-26"></div>
+        <div class="scoreboard-letter" id="letter-27"></div>
+        <div class="scoreboard-letter" id="letter-28"></div>
+        <div class="scoreboard-letter" id="letter-29"></div>
+      </div>
+    </div>
+
+    <div class="building_block">
+      <img
+        src="./images/abc_blocks.png"
+        alt="Building Blocks"
+        id="building_block"
+        class="building_blocks"
+        height="140px"
+      />
+    </div>
+
+    <div class="button_container">
+      <button onclick="window.location.reload()" id="play_again" class="btn">
+        Play 🅰ga⚡n
+      </button>
+    </div>
+
+    <button id="keyboardToggle" class="keyboard-toggle">⌨️</button>
+    <div id="virtualKeyboard" class="virtual-keyboard"></div>
+
+    <div class="confetti_controls">
+      <img
+        id="confetti_play"
+        class="confetti_control confetti_icon"
+        src="./images/confetti2.png"
+        alt="Start Confetti"
+        height="100px"
+        width="auto"
+        onclick="toggleInlineConfetti();"
+      />
+    </div>
+
+    <div class="balloon_controls">
+      <img
+        id="balloon_play"
+        class="balloon_play balloon_icon"
+        src="./images/water_balloon.png"
+        alt="Start Water Balloons!"
+        height="100px"
+        width="auto"
+        onclick="toggleInlineBalloon();"
+      />
+    </div>
+
+    <canvas id="gameCanvas" class="water_balloon"></canvas>
+
+    <script>
+      let toggle_confetti = true
+      let toggle_balloon = true
+
+      function toggleInlineConfetti() {
+        toggle_confetti = !toggle_confetti
+        startConfetti()
+        if (!toggle_confetti) {
+          stopConfetti()
+        }
+      }
+
+      function toggleInlineBalloon() {
+        toggle_balloon = !toggle_balloon
+        showWaterBalloon()
+        if (!toggle_balloon) {
+          setTimeout(() => {
+            canvas.classList.add('water_balloon')
+            canvas.style.position = ''
+            canvas.style.top = ''
+            canvas.style.left = ''
+            canvas.style.transform = ''
+            canvas.style.zIndex = ''
+          }, 2000)
+          toggle_balloon = !toggle_balloon
+        }
+      }
+    </script>
+
+    <script src="./scripts/mobileinput.js"></script>
+    <script src="./scripts/wordmaster.js"></script>
+    <!-- Game win screen -->
+    <script src="./scripts/confetti.js"></script>
+    <!-- Game lose screen -->
+    <script src="./scripts/threedballoon.js"></script>
+  </body>
+</html>
