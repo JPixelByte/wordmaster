@@ -374,13 +374,17 @@ p {
 
 /* Mobile Keyboard Styles */
 .virtual-keyboard {
+  cursor: pointer;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 8px 5px;
+  padding-top: 24px;
+  margin-top: 370px;
+  height: 200px;
   background: rgba(50, 50, 50, 0.95);
-  border-top: 2px solid #e07800;
+  border-top: 3px solid #e07800;
   z-index: 1000;
   display: none;
 }
