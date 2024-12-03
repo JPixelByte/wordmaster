@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Word Masters</title>
 
     <link
@@ -28,7 +25,7 @@
     <!-- Font Awesome icons -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
 
     <!-- Animate.css -->
@@ -36,29 +33,53 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/animate.css@4/animate.min.css"
     />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="./css/animations.css" />
     <link rel="stylesheet" href="./css/wordmaster.css" />
+    <link rel="stylesheet" href="./css/mobile.css" />
   </head>
   <body>
     <!-- <canvas class="confetti hide_confetti" id="canvas"></canvas> -->
     <header class="navbar">
       <h1 class="brand">W⭕®d M🅰steRs</h1>
+      <button
+        id="instructions-btn"
+        class="instructions-btn"
+        aria-label="Show Instructions"
+      >
+        <i class="fas fa-question-circle fa-lg"></i>
+      </button>
       <hr width="auto" class="hr_ruler" size="5" id="hr_ruler" />
     </header>
+
+    <!-- Instructions Modal -->
+    <div id="instructions-modal" class="instructions-modal">
+      <div class="modal-content">
+        <button class="close-btn" aria-label="Close Instructions">
+          <i class="fa fa-times"></i>
+        </button>
+        <h2>How to Play Wordmaster</h2>
+        <div class="instructions-content">
+          <ul class="no-bullets">
+            <li>
+              You have a 6 × 5 matrix grid, with six different words in total,
+              each containing five letters.
+            </li>
+            <li>
+              Use the Virtual Keyboard to enter your guesses. The '⌦' key acts
+              as enter on mobile devices.
+            </li>
+            <li>Incorrect guesses will overwrite the last game grid space.</li>
+            <li>Use the '⌫' key to delete letters one by one.</li>
+            <li>Click the keyboard icon to access the Virtual Keyboard.</li>
+            <li>
+              When you win, you'll be rewarded with a celebratory confetti
+              display!
+            </li>
+            <li>Click 'Play Again' to start a new game.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="info-bar">
       <div class="spiral">💢</div>
@@ -99,85 +120,54 @@
       </div>
     </div>
 
-    <div class="building_block">
-      <img
-        src="./images/abc_blocks.png"
-        alt="Building Blocks"
-        id="building_block"
-        class="building_blocks"
-        height="140px"
-      />
-    </div>
+    <img
+      src="./images/abc_blocks.png"
+      alt="Building Blocks"
+      class="building_blocks"
+      height="140px"
+    />
 
     <div class="button_container">
       <button onclick="window.location.reload()" id="play_again" class="btn">
         Play 🅰ga⚡n
+        <!-- Pl🅰y 🅰ga⚡n -->
       </button>
     </div>
 
-    <button id="keyboardToggle" class="keyboard-toggle">⌨️</button>
-    <div id="virtualKeyboard" class="virtual-keyboard"></div>
-
-    <div class="confetti_controls">
-      <img
-        id="confetti_play"
-        class="confetti_control confetti_icon"
-        src="./images/confetti2.png"
-        alt="Start Confetti"
-        height="100px"
-        width="auto"
-        onclick="toggleInlineConfetti();"
-      />
-    </div>
-
-    <div class="balloon_controls">
-      <img
-        id="balloon_play"
-        class="balloon_play balloon_icon"
-        src="./images/water_balloon.png"
-        alt="Start Water Balloons!"
-        height="100px"
-        width="auto"
-        onclick="toggleInlineBalloon();"
-      />
-    </div>
+    <!-- <button onclick="startConfetti();" class="btn btn-danger">Start</button>
+    <button onclick="stopConfetti();" class="btn btn-info">Stop</button>
+    <button onclick="toggleConfetti();" class="btn btn-warning">Toggle</button> -->
+    <!-- <canvas class="confetti" id="canvas"></canvas> -->
 
     <canvas id="gameCanvas" class="water_balloon"></canvas>
 
-    <script>
-      let toggle_confetti = true
-      let toggle_balloon = true
+    <!-- Virtual Keyboard -->
+    <div id="virtualKeyboard" class="virtual-keyboard"></div>
+    <button id="keyboardToggle" class="keyboard-toggle">⌨️</button>
 
-      function toggleInlineConfetti() {
-        toggle_confetti = !toggle_confetti
-        startConfetti()
-        if (!toggle_confetti) {
-          stopConfetti()
-        }
-      }
-
-      function toggleInlineBalloon() {
-        toggle_balloon = !toggle_balloon
-        showWaterBalloon()
-        if (!toggle_balloon) {
-          setTimeout(() => {
-            canvas.classList.add('water_balloon')
-            canvas.style.position = ''
-            canvas.style.top = ''
-            canvas.style.left = ''
-            canvas.style.transform = ''
-            canvas.style.zIndex = ''
-          }, 2000)
-          toggle_balloon = !toggle_balloon
-        }
-      }
-    </script>
-
-    <script src="./scripts/mobileinput.js"></script>
     <script src="./scripts/wordmaster.js"></script>
+    <script src="./scripts/mobileinput.js"></script>
     <!-- Game win screen -->
     <script src="./scripts/confetti.js"></script>
     <!-- Game lose screen -->
     <script src="./scripts/threedballoon.js"></script>
+    <script src="./scripts/instructions.js"></script>
   </body>
 </html>
+
+<!-- credits:
+ Game: from Frontend Masters: 
+Brian Holt
+
+animal alphabet background:
+https://i.pinimg.com/originals/c6/bf/8c/c6bf8cc359e28ccdf2b29b2419877fa5.png
+rainyweathers.com
+
+<!-- sound: winning sound-effects
+https://pixabay.com/sound-effects/search/congratulations/ floraphonic
+
+losing sound: hal from the movie 
+-->
+
+<!-- Confetti Animation on Game Win Screen
+https://www.cssscript.com/confetti-falling-animation/ -->
