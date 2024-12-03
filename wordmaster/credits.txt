@@ -3,16 +3,23 @@ Game: Brian Holt from Frontend Masters:
 
 Open AI: start of mobile responsiveness
 
-Codeium Windsurf: Virutal Mobile Keyboard, waterballoon effect and all around help.
+
+Codeium Windsurf: Mobile Friendly Virtual Keyboard, Instruction Modal, Game over Screen with balloon and audio sound effects, and all around help.
+
 
 Animal alphabet background:
 https://i.pinimg.com/originals/c6/bf/8c/c6bf8cc359e28ccdf2b29b2419877fa5.png
 
 
-Sounds: winning sound-effects
+Sounds: 
+Winning sound-effects:
 https://pixabay.com/sound-effects/search/congratulations/ floraphonic
-losing sound: hal from the movie 
+
+Losing sound-effects:
+From the movie Hal.
 
 Confetti Animation on Game Win Screen
 https://www.cssscript.com/confetti-falling-animation/
+
+If I forget something, LORD willing, I will remember to include it.
 
