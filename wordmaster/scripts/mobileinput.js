@@ -7,63 +7,72 @@ let isVirtualKeyboardVisible = false
 
 // Keyboard Layout
 const keyboardLayout = [
-  ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-  ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-  ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫'],
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫', '⌦']
 ]
 
 // Create Virtual Keyboard
 function createVirtualKeyboard() {
-  keyboardLayout.forEach((row, rowIndex) => {
-    const rowDiv = document.createElement('div')
-    rowDiv.className = 'keyboard-row'
-
-    row.forEach((key) => {
-      const button = document.createElement('button')
-      button.className = 'virtual-key'
-      button.textContent = key
-      button.setAttribute('data-key', key)
-      button.addEventListener('click', () => {
-        if (key === '⌫') {
-          document.dispatchEvent(
-            new KeyboardEvent('keydown', {
-              key: 'Backspace',
-              code: 'Backspace',
-              keyCode: 8,
-              which: 8,
-              bubbles: true,
-              cancelable: true,
+    keyboardLayout.forEach((row, rowIndex) => {
+        const rowDiv = document.createElement('div')
+        rowDiv.className = 'keyboard-row'
+        
+        row.forEach(key => {
+            const button = document.createElement('button')
+            button.className = 'virtual-key'
+            button.textContent = key
+            button.setAttribute('data-key', key)
+            button.addEventListener('click', (e) => {
+                e.preventDefault() // Prevent any default behavior
+                if (key === '⌫') {
+                    document.dispatchEvent(new KeyboardEvent('keydown', {
+                        key: 'Backspace',
+                        code: 'Backspace',
+                        keyCode: 8,
+                        which: 8,
+                        bubbles: true,
+                        cancelable: true
+                    }))
+                } else if (key === '⌦') {
+                    document.dispatchEvent(new KeyboardEvent('keydown', {
+                        key: 'Enter',
+                        code: 'Enter',
+                        keyCode: 13,
+                        which: 13,
+                        bubbles: true,
+                        cancelable: true
+                    }))
+                } else {
+                    document.dispatchEvent(new KeyboardEvent('keydown', {
+                        key: key.toLowerCase(),
+                        code: 'Key' + key.toUpperCase(),
+                        keyCode: key.charCodeAt(0),
+                        which: key.charCodeAt(0),
+                        bubbles: true,
+                        cancelable: true
+                    }))
+                }
             })
-          )
-        } else {
-          document.dispatchEvent(
-            new KeyboardEvent('keydown', {
-              key: key.toLowerCase(),
-              code: 'Key' + key.toUpperCase(),
-              keyCode: key.charCodeAt(0),
-              which: key.charCodeAt(0),
-              bubbles: true,
-              cancelable: true,
-            })
-          )
-        }
-      })
-      rowDiv.appendChild(button)
+            rowDiv.appendChild(button)
+        })
+        
+        virtualKeyboard.appendChild(rowDiv)
     })
-
-    virtualKeyboard.appendChild(rowDiv)
-  })
 }
 
 // Toggle Virtual Keyboard
 function toggleVirtualKeyboard() {
-  isVirtualKeyboardVisible = !isVirtualKeyboardVisible
-  virtualKeyboard.style.display = isVirtualKeyboardVisible ? 'block' : 'none'
+    isVirtualKeyboardVisible = !isVirtualKeyboardVisible
+    virtualKeyboard.style.display = isVirtualKeyboardVisible ? 'block' : 'none'
 }
 
 // Add click handler to keyboard toggle button
 if (keyboardToggle) {
-  keyboardToggle.addEventListener('click', toggleVirtualKeyboard)
+    keyboardToggle.addEventListener('click', (e) => {
+        e.preventDefault() // Prevent any default behavior
+        toggleVirtualKeyboard()
+    })
 }
 
 // Initialize virtual keyboard
@@ -72,6 +81,16 @@ createVirtualKeyboard()
 // Hide virtual keyboard by default
 virtualKeyboard.style.display = 'none'
 
+// Handle mobile Go/Return key without adding duplicate listeners
+document.addEventListener('keydown', function(event) {
+    // Only handle if it's actually from the mobile keyboard
+    if (event.isTrusted && (event.keyCode === 13 || event.key === 'Enter')) {
+        // The event will be handled by the main game's event listener
+        // We don't need to dispatch a new event
+        return
+    }
+}, { passive: true }) // Use passive listener for better performance
+
 // Add balloon sound to balloon event
 const balloonSound = new Audio('./sounds/waterballoon_event.mp3')
 
@@ -79,36 +98,36 @@ const balloonSound = new Audio('./sounds/waterballoon_event.mp3')
 const originalToggleInlineBalloon = window.toggleInlineBalloon
 
 // Override balloon toggle with sound
-window.toggleInlineBalloon = function () {
-  balloonSound.currentTime = 0
-  balloonSound.play()
-  if (typeof originalToggleInlineBalloon === 'function') {
-    originalToggleInlineBalloon()
-  }
+window.toggleInlineBalloon = function() {
+    balloonSound.currentTime = 0
+    balloonSound.play()
+    if (typeof originalToggleInlineBalloon === 'function') {
+        originalToggleInlineBalloon()
+    }
 }
 
 // Add sound to lose screen by overriding init function
 const originalInit = window.init
 if (typeof originalInit === 'function') {
-  window.init = async function () {
-    const result = await originalInit()
-
-    // After init completes, modify the lose condition to include balloon sound
-    const originalCommit = window.commit
-    if (typeof originalCommit === 'function') {
-      window.commit = async function () {
-        const result = await originalCommit()
-        if (!game_win && currentRow === ROUNDS) {
-          // Play balloon sound when game is lost
-          balloonSound.currentTime = 0
-          balloonSound.play()
-          // Show water balloon animation
-          showWaterBalloon()
+    window.init = async function() {
+        const result = await originalInit()
+        
+        // After init completes, modify the lose condition to include balloon sound
+        const originalCommit = window.commit
+        if (typeof originalCommit === 'function') {
+            window.commit = async function() {
+                const result = await originalCommit()
+                if (!game_win && currentRow === ROUNDS) {
+                    // Play balloon sound when game is lost
+                    balloonSound.currentTime = 0
+                    balloonSound.play()
+                    // Show water balloon animation
+                    showWaterBalloon()
+                }
+                return result
+            }
         }
+        
         return result
-      }
     }
-
-    return result
-  }
 }
