@@ -1,6 +1,8 @@
 # wordmaster
 Brian Holt: Frontend Master Class Project
  Word Master ✨ The Magical 5-Letter Quest! 🧙‍♂️
+<img width="1669" height="875" alt="wordmaster-screenshot (2)" src="https://github.com/user-attachments/assets/bb98add6-f48e-4de3-ae04-46c769dc7c22" />
+<img width="510" height="875" alt="wordmaster-screenshot (1)" src="https://github.com/user-attachments/assets/b8d9aa6b-69e7-4521-8517-78f56b2c132f" />
 
 ![Word Master](screenshot.png)  
 *(Look! The tiles dance when you guess right! 🌟)*
