@@ -3,7 +3,7 @@ Brian Holt: Frontend Master Class Project
 Word Master ✨ The Magical 5-Letter Quest! 🧙‍♂️
 
 
-https://github.com/user-atta<img width="1669" height="875" alt="wordmaster-screenshot (2)" src="https://github.com/user-attachments/assets/2ada278c-9089-47a0-aaba-c8cd7e71d7c1" />
+<img width="1669" height="875" alt="wordmaster-screenshot (2)" src="https://github.com/user-attachments/assets/2ada278c-9089-47a0-aaba-c8cd7e71d7c1" />
 
 
 *(Look! The tiles dance when you guess right! 🌟)*
