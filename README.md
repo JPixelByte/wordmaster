@@ -2,38 +2,44 @@
 Brian Holt: Frontend Master Class Project
 Word Master ✨ The Magical 5-Letter Quest! 🧙‍♂️
 
+If there are any mistakes please let me know.
 
 <img width="1669" height="875" alt="wordmaster-screenshot (2)" src="https://github.com/user-attachments/assets/2ada278c-9089-47a0-aaba-c8cd7e71d7c1" />
+# Word Master ✨ The Magical 5-Letter Quest! 🧙‍♂️
 
+<img width="1669" alt="Word Master screenshot" src="https://github.com/user-attachments/assets/2ada278c-9089-47a0-aaba-c8cd7e71d7c1" />
 
-*(Look! The tiles dance when you guess right! 🌟)*
+*(Look — the tiles dance and throw water balloons when you win! 🎈💦)*
 
-## Welcome, Little Word Wizard of the Adventerous Explorer Type! 🦄
+## Welcome, Little Word Wizard! 🦄
 
-Every day a secret 5-letter word hides inside the magic grid from a backend api which Mr. Holt I believe wrote himself.
-Can YOU find it in 6 tries or fewer?  
-Green = perfect spot! 🟩  
-Yellow = sneaky letter hiding somewhere else! 🟨  
-Gray = not in the word today! ⬜  
+Every day a secret 5-letter word hides in the sparkly grid.  
+You get **6 tries** to guess it.  
+🟩 Green = perfect spot!  
+🟨 Yellow = right letter, wrong spot!  
+⬜ Gray = not in the word today.  
 
-Win and watch the happy confetti explosion! 🎉🍭
+Guess it right and… **CONFETTI EXPLOSION + WATER BALLOONS + HAPPY MUSIC!** 🎉🍭💦
 
-Special Features:
-Mobile friendly, Instruction Modal and Mobile Keyboard
+### Super-Duper Features
+- Daily Magic Word (same for everyone on Earth! 🌍)
+- Endless Practice Mode (play a million times!)
+- Cute virtual keyboard for phones & tablets 📱
+- First-time instruction pop-up so nobody gets confused
+- Win streak & stats saved with magic cookies 🍪
+- Falling confetti + water balloon splash on victory!
+- Adorable animal alphabet background 🦁🐼🦒
 
-### Super Fun Modes
-- Daily Magic Word 🌈 (same mystery for everyone on Earth!)
-- Endless Practice Land 🏰 (play a billion times if you want!)
-- Stats Crown 👑 (see your win streak grow bigger and bigger!)
+[Play it now!](https://your-live-url-when-ready.com) *(coming soon or already live!)*
 
+## How to Play
+1. Type or tap your 5-letter guess  
+2. Press **Enter** (or the ⌦ key on the virtual keyboard)  
+3. Watch the colors change and keep guessing!  
+4. Win → party time! Lose → hug from a cartoon dinosaur 🦖
 
-## Tech Magic (for grown-up wizards)
-- Pure HTML + CSS + Vanilla JS ⚡ (no heavy potions needed)
-- Saves your streak with browser cookies 🍪
-- Works on phones, tablets, and even school Chromebooks! 📱
-
-## How to Start Your Own Adventure
-
+## Run It on Your Own Computer (Easy Mode)
 ```bash
 git clone https://github.com/JPixelByte/wordmaster.git
-cd wordmaster/wordmaster
+cd wordmaster/wordmaster   # the game lives here
+python -m http.server 8000   # or: npx http-server . 
