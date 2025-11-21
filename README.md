@@ -3,7 +3,7 @@ Brian Holt: Frontend Master Class Project
  Word Master ✨ The Magical 5-Letter Quest! 🧙‍♂️
 
 
-(https://github.com/user-attachments/assets/063a72b1-efb0-4630-a227-1923f8ebdf00)
+https://github.com/user-attachments/assets/063a72b1-efb0-4630-a227-1923f8ebdf00
 
 *(Look! The tiles dance when you guess right! 🌟)*
 
